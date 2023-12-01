@@ -36,7 +36,6 @@ export class MovieInfoComponent {
   }
 
   restartParam() {
-    
     this.router.navigate(['/movie', '']);
   }
 
