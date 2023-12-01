@@ -1,6 +1,6 @@
 <div class="card-container" *ngFor="let item of data; let i = index;">
   <div class="card" style="width: 18rem;">
-    <img [src]="item.poster_img" class="card-img-top" alt="..." (mouseenter)="navigateToInfo(item?.title)"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <img [src]="item.poster_img" class="card-img-top" alt="..." (mouseenter)="navigateToInfo(item?.title)" data-bs-toggle="modal" data-bs-target="#exampleModal">
     
     <div class="card-body">
       <div class="form-check form-switch">

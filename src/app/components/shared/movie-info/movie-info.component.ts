@@ -37,6 +37,10 @@ export class MovieInfoComponent {
 
   restartParam() {
     this.router.navigate(['/movie', '']);
+    this.route.params.subscribe(params => {
+      this.nameFromRoute = params['moviename'];
+      this.fetchData(String(this.nameFromRoute));
+    });
   }
 
 }
