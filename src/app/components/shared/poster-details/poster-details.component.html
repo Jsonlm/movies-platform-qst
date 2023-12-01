@@ -1,21 +1,19 @@
 <div class="card-container" *ngFor="let item of data; let i = index;">
   <div class="card" style="width: 18rem;">
-    <img [src]="item.poster_img" class="card-img-top" alt="..." (click)="navigateToInfo(item?.title)"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <img [src]="item.poster_img" class="card-img-top" alt="..." (mouseenter)="navigateToInfo(item?.title)"  data-bs-toggle="modal" data-bs-target="#exampleModal">
     
     <div class="card-body">
-      <!-- <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Add to watchlist</label>
-      </div> -->
-      <a class="btn btn-primary" *ngIf="!item.watchlist" (click)="addWatchlist(item.title)">Add to watchlist</a>
-      <a class="btn btn-primary" *ngIf="item.watchlist" (click)="removeWatchlist(item.title)">Remove from watchlist</a> 
-      <br>
-      <br>
-      <h5 class="card-title">{{item.title}}</h5>
-      <!-- <p class="card-text">{{item.description}}</p> -->
+      <div class="form-check form-switch">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Watchlist 
+          <input class="form-check-input" type="checkbox" 
+          role="switch" id="flexSwitchCheckDefault" 
+          [checked]="item.watchlist" (click)="turnToogle(item.title, item.watchlist)">
+        </label>
+      </div>
+      <!-- <a class="btn btn-primary" *ngIf="!item.watchlist" (click)="addWatchlist(item.title)">Add to watchlist</a>
+      <a class="btn btn-primary" *ngIf="item.watchlist" (click)="removeWatchlist(item.title)">Remove from watchlist</a>  -->
+      <!-- <h5 class="card-title">{{item.title}}</h5> -->
       <span class="badge rounded-pill" *ngIf="item.watchlist">On my watchlist</span>
-      <br>
-      <br>
       <!-- <a [href]="item.trailer_Link" target="_blank" class="btn btn-primary">Watch trailer</a> -->
     </div>
   </div>

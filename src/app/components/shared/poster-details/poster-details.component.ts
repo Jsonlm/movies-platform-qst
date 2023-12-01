@@ -11,6 +11,7 @@ export class PosterDetailsComponent implements OnChanges {
   private _movies!: Movie[];
   public data: any = [];
   public watchlist!: string[];
+  public isChecked: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -113,5 +114,13 @@ export class PosterDetailsComponent implements OnChanges {
   
   navigateToInfo(nameFromThumbnail: string) {
     this.router.navigate(['/movie', nameFromThumbnail]);
+  }
+
+  turnToogle(movie: string, checked: boolean) {
+    if (checked) {
+      this.removeWatchlist(movie);
+    } else if (!checked) {
+      this.addWatchlist(movie);
+    }
   }
 }
