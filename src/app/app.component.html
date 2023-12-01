@@ -1,0 +1,14 @@
+
+<router-outlet></router-outlet>
+<div class="row g-3 align-items-center filter" [formGroup]="filterForm">
+  <div class="col-auto">
+    <label for="inputFilter" class="col-form-label">Movie filter: </label>
+  </div>
+  <div class="col-auto">
+    <input type="text" id="inputFilter" class="form-control" formControlName="movieFilter">
+  </div>
+</div>
+
+<div class="container">
+  <app-poster-details [movies]="filteredMovies"></app-poster-details>
+</div>

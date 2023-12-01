@@ -1,0 +1,27 @@
+<div class="container-info">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{movie.title}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="300px" [src]="safeTrailerLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <p>
+                        {{movie.description}}
+                    </p>
+                    <strong>
+                        <small>{{movie.released_date}}</small>
+                    </strong>
+                    <br>
+                    <br>
+                    <strong>Genders :</strong> <small class="genre-data badge text-bg-info" *ngFor="let genre of movie.genre">{{genre}}</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
