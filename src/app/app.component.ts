@@ -13,6 +13,8 @@ export class AppComponent {
   public data: Movie[] = [];
   public filteredMovies: Movie[] = [];
   public filterForm!: FormGroup;
+  public watchlistSelected!: boolean;
+  public disabledWatchlist!: boolean;
 
   constructor(private formBuilder: FormBuilder  ) {}
 
@@ -21,22 +23,37 @@ export class AppComponent {
     this.filteredMovies = this.data;
 
     this.filterForm = this.formBuilder.group({
-      movieFilter: [''] // Initialize the form control with an empty string
+      movieFilter: ['']
     });
 
     this.filterForm.get('movieFilter')?.valueChanges.subscribe(value => {
       this.applyFilter(value);
+      this.watchlistSelected = false;
     });
+
+    localStorage.getItem('watchlist') === '[]' || localStorage.getItem('watchlist') === null
+    ? this.disabledWatchlist = true
+    : this.disabledWatchlist = false
   }
 
   applyFilter(filterValue: string) {
     this.filteredMovies = this.data.filter(movie =>
       movie.title.toLowerCase().includes(filterValue.toLowerCase()) ||
       movie.released_date.toLowerCase().includes(filterValue.toLowerCase()) 
-
     );
+  }
 
-    console.log(this.filteredMovies);
-    
+  applyWatchlist() {
+    this.watchlistSelected === true ? this.watchlistSelected = false :  this.watchlistSelected = true;
+  }
+
+  verifyStatus(event: boolean) {
+    if (localStorage.getItem('watchlist') === '[]' || localStorage.getItem('watchlist') === null) {
+      this.disabledWatchlist = true;
+      this.watchlistSelected = false;
+    } else if (localStorage.getItem('watchlist') !== '[]' || localStorage.getItem('watchlist') !== null) {
+      this.disabledWatchlist = false;
+      this.watchlistSelected = event;
+    }
   }
 }

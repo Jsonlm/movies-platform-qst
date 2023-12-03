@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/core/models/movie';
 
@@ -12,8 +12,11 @@ export class PosterDetailsComponent implements OnChanges {
   public data: any = [];
   public watchlist!: string[];
   public isChecked: boolean = false;
+  public _showWatchlist: boolean = false;
 
   constructor(private router: Router) { }
+
+  @Output() resetWatchlistButton = new EventEmitter<boolean>;
 
   @Input()
   get movies(): Movie[] {
@@ -22,6 +25,21 @@ export class PosterDetailsComponent implements OnChanges {
   set movies(value: Movie[]) {
     this._movies = value;
     this.data = value;
+  }
+
+  @Input()
+  get showWatchlist(): boolean {
+    return this._showWatchlist;
+  }
+  set showWatchlist(value: boolean) {
+    if (value) {
+      let data: any[];
+      this._showWatchlist = value;
+      data = this.movies.filter((objeto: any) => objeto.watchlist === this._showWatchlist);
+      this.data = data;
+    } else {
+      this.data = this._movies;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -72,6 +90,7 @@ export class PosterDetailsComponent implements OnChanges {
       }
       this.updateListFromLocalStorage();
     }
+    this.resetWatchlist();
   }
 
   removeWatchlist(movieTitle: string | null) {
@@ -92,6 +111,7 @@ export class PosterDetailsComponent implements OnChanges {
         return item;
       });
     }
+    this.resetWatchlist();
   }
 
   updateListFromLocalStorage() {
@@ -122,5 +142,9 @@ export class PosterDetailsComponent implements OnChanges {
     } else if (!checked) {
       this.addWatchlist(movie);
     }
+  }
+
+  resetWatchlist() {
+    this.resetWatchlistButton.emit(false);
   }
 }
