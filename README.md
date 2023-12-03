@@ -8,5 +8,11 @@
 
 https://movies-platform-qst-final.vercel.app/ 
 
-## Code 100% public
+## Application version 1.1.0
+
+# Last update: 
+
+    12/3/2023 11:30 🕦 PM | 23:30 
+
+# Code 100% public
 
